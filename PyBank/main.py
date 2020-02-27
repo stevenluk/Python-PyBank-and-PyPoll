@@ -1,4 +1,5 @@
 import csv
+import os
 
 rows=0
 totalrevenue=0
@@ -6,23 +7,25 @@ revenuechange=0
 initialrevenue=0
 changeinrevenue=[]
 date=[]
+
+dir_path=os.path.dirname(os.path.realpath(__file__))
+csvpath=os.path.join(dir_path,'budget_data.csv')
+
 with open('budget_data.csv', 'r') as csvfile:
     Data = csv.reader(csvfile,delimiter=',')
     next(Data)
    
     for lines in Data:
         rows +=1
-        #print(lines)
+       
         totalrevenue=totalrevenue+int(lines[1])
         difference=int(lines[1])-int(initialrevenue)
         changeinrevenue.append(difference)
         date.append(lines[0])
         revenuechange=revenuechange+difference
         initialrevenue=lines[1]
-        #averagechange=totalrevenue/rows
-        #print(difference)
+        
 averagechange=revenuechange/rows     
-#print(averagechange)
 maxincrease=max(changeinrevenue)
 maxincreasedate=date[changeinrevenue.index(maxincrease)]
 maxdecrease=min(changeinrevenue)

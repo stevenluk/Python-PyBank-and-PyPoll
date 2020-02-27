@@ -1,5 +1,9 @@
 import csv
+import os
 from collections import Counter
+
+dir_path=os.path.dirname(os.path.realpath(__file__))
+csvpath=os.path.join(dir_path,'election_data.csv')
 
 rows=0
 candidate=[]
